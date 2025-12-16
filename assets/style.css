@@ -1,0 +1,125 @@
+ .landing {
+     background-image: url('images/landing.jpg');
+     background-size: cover;
+     background-position: center;
+     height: 100vh;
+     color: white;
+     position: relative;
+ }
+
+ .home {
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/main.jpg');
+     background-size: cover;
+     background-position: center;
+     height: 100vh;
+     color: white;
+     position: relative;
+ }
+
+ .glass-navbar {
+     background: rgba(0, 0, 0, 0.677);
+     backdrop-filter: blur(5px) saturate(100%);
+ }
+
+.nav-link.active {
+     border-bottom: 3px solid #39FF14;
+     font-weight: 600;
+ }
+
+ .nav-link:hover {
+     color: #198754;
+     text-decoration: none;
+ }
+
+ .center-left-container {
+  min-height: 100vh;           
+  display: flex;
+  align-items: center;         
+  justify-content: flex-start; 
+}
+.center-left-content {
+  text-align: left;
+}
+
+.btn-outline-neon {
+  border: 2px solid #39FF14;
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-outline-neon:hover,
+.btn-outline-neon:focus {
+  background: #39FF14;
+  color: #111;
+}
+
+ .subtitle {
+     font-size: 1rem;
+     color: #A9A9A9;
+     margin-bottom: 1rem;
+ }
+
+ .card {
+     background: white;
+     border-radius: 12px;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+     overflow: hidden;
+     transition: 0.3s;
+ }
+
+ .card:hover {
+     transform: translateY(-5px);
+ }
+
+.image-wrapper {
+    width: 170px;
+    height: 170px;
+    background-image: url("images/portal.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 25px rgba(0, 255, 150, 0.8);
+}
+
+.image-wrapper:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+
+.character-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: black;
+}
+
+ .card-body h3 {
+     margin: 0 0 8px;
+     font-size: 18px;
+ }
+
+ .card-body p {
+     margin: 4px 0;
+     font-size: 14px;
+     color: #555;
+ }
+
+ .status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.status-alive { background: #39FF14; }
+.status-dead { background: #ff2b2b; }
+.status-unknown { background: #aaa; }

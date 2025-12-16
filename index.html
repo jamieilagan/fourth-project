@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Anta' rel='stylesheet'>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-black" style="font-family: 'Anta', sans-serif;">
+    <div class="landing" id="home">
+        <div class="container-fluid py-3 align-items-center position-fixed z-3 top-0 start-0 end-0 glass-navbar">
+            <div class="row align-items-center flex-nowrap">
+                <div class="col d-flex justify-content-center align-items-center gap-4 fw-bold">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <img src="assets/images/logo.png" alt="Rick and Morty Logo" width="174" height="42">
+                    <a href="characters.html" class="nav-link">Characters</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-left-container text-white text-start" id="about">
+            <div class="center-left-content p-5">
+                <div class="col-8 col-md-5">
+                    <p>
+                        Rick and Morty is a wild, mind-bending sci-fi ride across infinite universes, following the
+                        unhinged genius Rick Sanchez and his constantly overwhelmed grandson, Morty. Packed with dark
+                        humor, brutal satire, and unpredictable chaos, the series shatters reality, mocks existence, and
+                        proves that in an infinite multiverse, anything can happen—and probably will.<br>
+
+                        <br>Dive into the chaos of the Rick and Morty multiverse. Explore characters from across infinite
+                        dimensions. Discover familiar faces, alternate versions, and bizarre beings—all in one place.
+                        Grab your portal gun and start exploring.
+                    </p>
+                </div>
+                <div class="col pt-2">
+                    <button id="nextPageBtn" class="btn btn-outline-neon text-light">Explore Characters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        document.getElementById('nextPageBtn').addEventListener('click', function () {
+            window.location.href = 'characters.html';
+        });
+    </script>
+</body>
+
+</html>

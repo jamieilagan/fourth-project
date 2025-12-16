@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rick and Morty</title>
+    <link rel="icon" href="assets/images/webLogo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Anta' rel='stylesheet'>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="bg-black" style="font-family: 'Anta', sans-serif;">
+    <div class="home" id="home">
+        <div class="container-fluid py-3 align-items-center position-fixed z-2 top-0 start-0 end-0 glass-navbar">
+            <div class="row align-items-center flex-nowrap">
+                <div class="col d-flex justify-content-center align-items-center gap-4 fw-bold">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <img src="assets/images/logo.png" alt="Rick and Morty Logo" width="174" height="42">
+                    <a href="#characters" class="nav-link active">Characters</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Characters -->
+    <div class="container text-white mb-2 px-5 pb-5 text-center" id="characters">
+        <h2>Characters</h2>
+        <div class="pagination-controls my-3 gap-3 d-flex justify-content-center">
+            <button class="btn-outline-neon text-light" onclick="prevPage()">&laquo; Previous</button>
+            <span class="page-info" id="pageInfo"> Page 1 </span>
+            <button class="btn-outline-neon text-light" onclick="nextPage()">Next &raquo;</button>
+        </div>
+        <div class="row mt-4" id="contentArea"></div>
+        <div class="row mt-4">
+            <div class="col">
+                <button class="btn btn-outline-neon text-light" onclick="scrollToCharacters()">Back to Top</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container-fluid py-2 align-items-center text-center">
+            <div class="row align-items-center flex-nowrap">
+                <div class="col-12 text-white">
+                    <p>© 2025 Rick and Morty. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var contents = document.getElementById("contentArea");
+        var page = 1;
+
+        function scrollToCharacters() {
+            document.getElementById("characters").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function nextPage() {
+            if (page < totalPages) {
+                page++;
+                contents.innerHTML = "";
+                updatePageInfo();
+                getCharacter();
+            }
+        }
+
+        function prevPage() {
+            if (page > 1) {
+                page--;
+                contents.innerHTML = "";
+                updatePageInfo();
+                getCharacter();
+            }
+        }
+
+        const charactersPerPage = 21;
+        let totalPages = 1;
+        let totalCharacters = 0;
+
+        async function computeTotalPages() {
+            const res = await fetch("https://rickandmortyapi.com/api/character");
+            const data = await res.json();
+
+            totalCharacters = data.info.count;
+            totalPages = Math.ceil(totalCharacters / charactersPerPage);
+            updatePageInfo();
+        }
+
+        function updatePageInfo() {
+            document.getElementById("pageInfo").innerText =
+                `Page ` + page + ` of ` + totalPages;
+        }
+
+        const getCharacter = async () => {
+            contents.innerHTML = "";
+
+            const startId = (page - 1) * charactersPerPage + 1;
+            const endId = Math.min(page * charactersPerPage, totalCharacters);
+            const itemsThisPage = endId - startId + 1;
+
+            for (let i = startId; i <= endId; i++) {
+                const res = await fetch(`https://rickandmortyapi.com/api/character/${i}`);
+                const character = await res.json();
+
+                const statusClass =
+                    character.status === "Alive" ? "status-alive" : character.status === "Dead" ? "status-dead" : "status-unknown";
+
+                contents.innerHTML += `
+                <div class="col-12 col-md-6 col-lg-4 p-2 g-2">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="my-3 h4">
+                        `+ character.id + `
+                        </div>
+                        <div class="image-wrapper mx-auto">
+                        <img src="`+ character.image + `" class="character-img mt-2" alt="` + character.name + `">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">` + character.name + `</h4>
+                            <span class="subtitle">Species:</span> ` + character.species + `<br>
+                            <span class="subtitle">Last Seen:</span> ` + character.location.name + `<br>
+                            <span class="subtitle">Status:</span> <span class="status-dot `+ statusClass + `"></span>` + character.status + `<br>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }
+        };
+
+        async function init() {
+            await computeTotalPages();
+            getCharacter();
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
